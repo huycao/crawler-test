@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <title>Input the Linkedin Post link to crawler</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-8 col-lg-6 col-xl-10">
+                            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                                <div class="card-body p-5 text-center">
+
+                                    <h3 class="mb-5">Input the Linkedin Post link to crawler</h3>
+                                    <form id="postLinks" action="#" method="post" onsubmit="return ValidationEvent();">
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="typeLink" class="form-control form-control-lg"
+                                                autofocus />
+                                        </div>
+
+                                        <button class="btn btn-primary btn-lg btn-block" type="button" onclick="return ValidationEvent();">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script> -->
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+        function extractRootDomain(url) {
+            const domain = new URL(url).hostname;
+            const elems = domain.split('.');
+            const iMax = elems.length - 1;
+
+            const elem1 = elems[iMax - 1];
+            const elem2 = elems[iMax];
+
+            const isSecondLevelDomain = iMax >= 3 && (elem1 + elem2).length <= 5;
+            return (isSecondLevelDomain ? elems[iMax - 2] + '.' : '') + elem1 + '.' + elem2;
+        }
+        function ValidationEvent() {
+            const link = document.getElementById('typeLink').value;
+            const urlReg = /^http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?/
+            if (link === '') {
+                alert('Please input the link');
+                return false;
+            } else if (!(link).match(urlReg)) {
+                alert('Invalid link');
+                return false;
+            } else {
+                const domain = extractRootDomain(link);
+                if (domain !== 'linkedin.com') {
+                    alert('Please input the Linkedin link');
+                    return false;
+                }
+                postLinks();
+                return false;
+            }
+        }
+
+        function postLinks() {
+            var url = 'http://0.0.0.0:4500/api/links';
+            const data = {
+                link: $('#typeLink').val()
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function (data) {
+                    alert(data.message); // show server response 
+                    $('#typeLink').val('').focus();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    const res = JSON.parse(XMLHttpRequest.responseText);
+                    alert(res.message);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

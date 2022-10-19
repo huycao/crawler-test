@@ -1,0 +1,18 @@
+{
+  "name": "crawler-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Huy Cao <khahuy@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "express": "^4.18.2",
+    "jquery": "^3.6.1"
+  }
+}

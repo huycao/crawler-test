@@ -1,0 +1,39 @@
+tags:
+- name: links
+  description: links API
+
+paths:
+
+# [POST] links
+    post:
+      tags:
+      - links
+      summary: Add Link
+      parameters:
+      - name: body
+        in: body
+        description: link Data
+        required: true
+        schema:
+          $ref: '#/definitions/links'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  links:
+    type: object
+    required:
+        - link
+    properties:
+      link:
+        type: string
+        description: url
+
+schemes:
+ - http
