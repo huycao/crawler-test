@@ -14,3 +14,5 @@ app.get("/", (req, res) => {
 app.listen(5500, () => {
   console.log('Listening on port ' + 5500);
 });
+
+console.log('plat-123 Test');
