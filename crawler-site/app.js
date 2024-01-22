@@ -11,6 +11,17 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'))
 });
 
+console.log('Test')
+
 app.listen(5500, () => {
   console.log('Listening on port ' + 5500);
 });
+
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
+console.log('Hello')
