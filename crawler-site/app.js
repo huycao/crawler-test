@@ -10,9 +10,9 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'))
 });
-console.log('plat-234 Hello');
+
 
 app.listen(5500, () => {
   console.log('Listening on port ' + 5500);
 });
-
+console.log('plat-111 ABC');
