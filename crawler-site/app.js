@@ -11,8 +11,9 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'))
 });
 
-
+console.log('plat-222 bbb');
 app.listen(5500, () => {
   console.log('Listening on port ' + 5500);
 });
 console.log('plat-111 ABC');
+
